@@ -74,6 +74,7 @@ class BackTrack:
 
         return actual_node
 
+
 # same as BackTrack above but with update (shown in comments where the updates happened)
 class BackTrackWithCircleMonitoring:
     def __init__(self, delay_seconds):
@@ -84,7 +85,6 @@ class BackTrackWithCircleMonitoring:
     # update
     def seen_already(self, state):
         return state in self.history
-
 
     def search(self, start_state, operators):
         # aktuális csomopont
@@ -130,4 +130,145 @@ class BackTrackWithCircleMonitoring:
             print("No solution found during search")
 
         return actual_node
+
+
+# 5.het: szélességi kereső
+# depth added
+class TreeNode:
+    def __init__(self, state, parent, operator, applicable, depth):
+        self.state = state
+        self.parent = parent
+        self.operator = operator
+        self.applicable = applicable
+        self.depth = depth
+
+    # nem zh type str
+    def __str__(self):
+        return f"TreeNode [state={str(self.state)}, operator={str(self.operator)}"
+
+
+class BreadthSearchAlgorithm:
+    def __init__(self, delay_seconds=1):
+        self.delay_seconds = delay_seconds
+
+    def extend(self, node, open_nodes, closed_nodes, operators):
+        for o in operators:
+            if o.precondition_fulfilled(node.state):
+                state = o.use(node.state)
+
+                # ?? : next function
+                state_in_open_nodes = next(filter(lambda n: n.state == state, open_nodes), None)
+
+                state_in_closed_nodes = next(filter(lambda n: n.state == state, closed_nodes), None)
+
+                if state_in_open_nodes is None and state_in_closed_nodes is None:
+                    new_node = TreeNode(
+                        state=state,
+                        parent=node,
+                        operator=o,
+                        depth=node.depth + 1
+                    )
+
+                    open_nodes.append(new_node)
+
+            open_nodes.remove(node)
+            closed_nodes.append(node)
+
+    def search(self, start_state, operators):
+        new_node = TreeNode(
+            state=start_state,
+            parent=None,
+            operator=None,
+            depth=0
+        )
+
+        open_nodes = [new_node]
+        closed_nodes = []
+
+        while True:
+            if len(open_nodes) == 0:
+                break
+
+            min_depth = min([n.depth for n in open_nodes])
+            node = next(filter(lambda n: n.depth == min_depth, open_nodes))
+
+            if node.state.is_goal_state():
+                break
+
+            self.extend(node, open_nodes, closed_nodes, operators)
+
+            time.sleep(self.delay_seconds)
+
+            print("node:", node)
+
+        if len(open_nodes) != 0:
+            print("Solution found:")
+            get_solution(node)
+        else:
+            print("no solution found during search")
+
+        return node
+
+
+class DepthFirstSearch:
+    def __init__(self, delay_seconds=1):
+        self.delay_seconds = delay_seconds
+
+    def extend(self, node, open_nodes, closed_nodes, operators):
+        for o in operators:
+            if o.precondition_fulfilled(node.state):
+                state = o.use(node.state)
+
+                # ?? : next function
+                state_in_open_nodes = next(filter(lambda n: n.state == state, open_nodes), None)
+
+                state_in_closed_nodes = next(filter(lambda n: n.state == state, closed_nodes), None)
+
+                if state_in_open_nodes is None and state_in_closed_nodes is None:
+                    new_node = TreeNode(
+                        state=state,
+                        parent=node,
+                        operator=o,
+                        depth=node.depth + 1
+                    )
+
+                    open_nodes.append(new_node)
+
+            open_nodes.remove(node)
+            closed_nodes.append(node)
+
+    def search(self, start_state, operators):
+        new_node = TreeNode(
+            state=start_state,
+            parent=None,
+            operator=None,
+            depth=0
+        )
+
+        open_nodes = [new_node]
+        closed_nodes = []
+
+        while True:
+            if len(open_nodes) == 0:
+                break
+
+            max_depth = max([n.depth for n in open_nodes])
+            node = next(filter(lambda n: n.depth == max_depth, open_nodes))
+
+            if node.state.is_goal_state():
+                break
+
+            self.extend(node, open_nodes, closed_nodes, operators)
+
+            time.sleep(self.delay_seconds)
+
+            print("node:", node)
+
+        if len(open_nodes) != 0:
+            print("Solution found:")
+            get_solution(node)
+        else:
+            print("no solution found during search")
+
+        return node
 
