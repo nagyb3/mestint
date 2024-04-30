@@ -41,4 +41,30 @@ ponthatarok:
 - 90%: 5
 
 máj 13
-máj 21 (?)
+maj 20-ai héten javító, vagy nem....
+
+**11th week notes:**
+
+**regression.ipynb**
+
+- adathalmaz beolvasasa (read csv)
+- StandardScaler()
+- split (nem kell?)
+- .fit_transform
+- !: neuralis halo definialasa : model = Sequential([Dense ...])
+
+optimalizacio:
+
+- model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.0003), loss="mean_square_error")...
+
+**reinforcment**
+
+tictactoe.py
+
+- definiicio episode?
+- zh pl: act()
+- ?? epsilon
+- zh : def learn
+- zh: formulából függvény (pl def learn) (pass részét kitölteni...)
+
+game_search_algorithm 66-91. line (class QLearningAgent)
