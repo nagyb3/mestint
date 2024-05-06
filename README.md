@@ -68,3 +68,36 @@ tictactoe.py
 - zh: formulából függvény (pl def learn) (pass részét kitölteni...)
 
 game_search_algorithm 66-91. line (class QLearningAgent)
+
+## 12th week:
+
+- TEOKJ 2.sz 112 H18
+- nincs segedeszköz (csak elearning?, ZIP download, ZIP upload)
+- notebook/nem notebook ugy lesz ahogy a AI-2024 repo-ba
+- elmélet: 1db 2pont, fóliákból, tulelokészlet: **elméleti kérdések** elearningen!
+- zh pl: tobbosztályos osztályozás, egy osztáloyos nem lesz
+
+## zh feladatok types:
+
+- elso feladat zh: állapottér repr. egy része implementációja (minden is, bármelyik része) (első 4-5 óra kb)
+- kereső algoritmus masodik feladat: oran tanultak kozul, foleg implementalni kell tudni
+- harmadik: neuralis halo, regresszio vagy tobbosztályos osztályozás, nem kell adatok betoltese, maga a train test split alkalmazasa, validation nem kell
+- negyedik: neuralis halo definialasa (rétegek), loss fuggveny, kimeneti rétegek, bemeneti rétegek száma
+- otodik reinforcment learning: nem kornyezetet kell implementalni, QLearningAgent
+- hatodik: elméleti rész, elméleti kérdések elearningen kb ...
+
+neuralis halobol kell: model = Sequential([]), bemeneti réteg, rejtett rétegek (köztes rétegek), kimeneti réteg, kell csak kb.. , aktivacios fuggveny minden rétegben kell!! minden rétegben relu, kivéve a kimeneti rétegben ahol osztályozásnál több ostályozásnál softmax kell, ha regresszio -> akkor nincs aktivacios fuggveny
+Dropout nem kell, csak Dense kell.
+
+bemeneti akkor 1, ha X_train[0] 1 elemű?? (pl MNIST), vagy annyi amennyi darabszám van ott X_train[0]-ba
+vagy X_train.shape (sor, oszlop)
+
+better way to run jupyter notebook: save -> clear all outputs -> run all
+
+foleg a feltoltott kodok a fontosak
+
+pót zh nem lesz.
+
+windows: Anaconda Prompt !,
+rész pontok lesznek,
+max 10 pont
